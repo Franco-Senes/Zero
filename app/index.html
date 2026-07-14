@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zero</title>
+    <link rel="icon" href="/icon.png" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        spotify: '#1DB954',
+                        ytmusic: '#FF0000',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-white text-zinc-950 dark:bg-black dark:text-zinc-100 overflow-x-hidden min-h-screen relative selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+
+<div id="navbar-container" class="fixed top-0 left-0 right-0 z-50 flex justify-center px-0 transition-container">
+    <nav id="main-nav" class="transition-navbar w-full max-w-full h-24 rounded-none px-8 sm:px-16 flex items-center justify-between border-b border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-md">
+
+        <a href="#inicio" class="flex items-center gap-3 group focus:outline-none">
+            <svg class="h-8 w-8 text-black dark:text-white transition-all duration-300 group-hover:rotate-12 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="10"></circle>
+                <circle cx="50" cy="50" r="19" stroke="currentColor" stroke-width="10"></circle>
+                <line x1="12" y1="72" x2="88" y2="28" stroke="currentColor" stroke-width="10" stroke-linecap="round"></line>
+            </svg>
+            <span class="text-2xl font-black tracking-wide lowercase text-black dark:text-white font-syne transition-colors duration-300 group-hover:text-zinc-500 dark:group-hover:text-zinc-400">
+                zero
+            </span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8">
+            <a href="#proyectos" data-i18n="nav_projects" class="desktop-link text-sm font-medium text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors duration-200">Proyectos</a>
+            <a href="#hackatons" data-i18n="nav_hackathons" class="desktop-link text-sm font-medium text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors duration-200">Hackatons</a>
+            <a href="#tecnologias" data-i18n="nav_technologies" class="desktop-link text-sm font-medium text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors duration-200">Tecnologias</a>
+            <a href="#contacto" data-i18n="nav_contact" class="desktop-link text-sm font-medium text-zinc-500 hover:text-black dark:text-zinc-400 dark:hover:text-white transition-colors duration-200">Contacto</a>
+        </div>
+
+        <div class="flex items-center gap-1">
+
+            <button id="language-toggle" class="px-3.5 py-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-xs font-bold font-mono tracking-wider text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-all duration-300 focus:outline-none flex items-center justify-center gap-1" aria-label="Idioma">
+                <span id="lang-es-indicator" class="text-black dark:text-white font-black">ES</span>
+                <span class="text-zinc-300 dark:text-zinc-700">/</span>
+                <span id="lang-en-indicator" class="text-zinc-400 dark:text-zinc-600 font-medium">EN</span>
+            </button>
+
+            <button id="theme-toggle" class="p-3 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 focus:outline-none" aria-label="Tema">
+                <img id="moon-icon" class="w-5 h-5 text-black block dark:hidden" src="https://icons.hackclub.com/api/icons/black/moon">
+                <img id="sun-icon" class="w-5 h-5 text-white hidden dark:block" src="https://icons.hackclub.com/api/icons/white/sun">
+            </button>
+
+            <div id="login-desktop-container" class="hidden md:block ml-2 mr-2"></div>
+
+            <button id="menu-toggle" class="relative group p-3 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 focus:outline-none" aria-label="Abrir menú">
+                <div class="w-6 h-5 flex flex-col justify-between items-end relative overflow-hidden">
+                    <span id="line-1" class="w-6 h-[2px] bg-black dark:bg-white rounded-full transition-all duration-300 origin-right"></span>
+                    <span id="line-2" class="w-4 h-[2px] bg-black dark:bg-white rounded-full transition-all duration-300 group-hover:w-6"></span>
+                    <span id="line-3" class="w-5 h-[2px] bg-black dark:bg-white rounded-full transition-all duration-300 origin-right"></span>
+                </div>
+            </button>
+        </div>
+    </nav>
+</div>
+
+<div id="mobile-menu" class="fixed inset-0 z-40 bg-white/95 dark:bg-black/95 backdrop-blur-2xl flex flex-col justify-center items-center gap-8 opacity-0 pointer-events-none transition-all duration-500">
+    <a href="#inicio" data-i18n="nav_home" class="mobile-link text-3xl font-bold hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Inicio</a>
+    <a href="#proyectos" data-i18n="nav_projects" class="mobile-link text-3xl font-bold hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Proyectos</a>
+    <a href="#hackatons" data-i18n="nav_hackathons" class="mobile-link text-3xl font-bold hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Hackatons</a>
+    <a href="#tecnologias" data-i18n="nav_technologies" class="mobile-link text-3xl font-bold hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Tecnologias</a>
+    <a href="#contacto" data-i18n="nav_contact" class="mobile-link text-3xl font-bold hover:text-zinc-500 dark:hover:text-zinc-400 transition-colors">Contacto</a>
+
+    <div class="mt-4 flex items-center gap-2">
+        <button id="mobile-language-toggle" class="px-4 py-2 rounded-full border border-black/10 dark:border-white/10 text-sm font-bold font-mono tracking-wider hover:bg-black/5 dark:hover:bg-white/5 transition-all focus:outline-none flex items-center gap-1">
+            <span id="mobile-lang-es-indicator" class="text-black dark:text-white font-black">ES</span>
+            <span class="text-zinc-300 dark:text-zinc-700">/</span>
+            <span id="mobile-lang-en-indicator" class="text-zinc-400 dark:text-zinc-600 font-medium">EN</span>
+        </button>
+    </div>
+    <div id="login-mobile-container" class="w-full text-center"></div>
+</div>
+
+<main id="inicio" class="relative z-10 pt-44 pb-16 px-4 max-w-5xl mx-auto flex flex-col items-center justify-center min-h-screen">
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-3xl mb-12">
+
+        <div id="weather-card" class="flex items-center gap-4 p-4 rounded-2xl border border-black/5 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/30 backdrop-blur-sm">
+            <div id="weather-icon-placeholder" class="text-3xl">
+                ⛅
+            </div>
+            <div class="text-left">
+                <span class="text-[10px] font-mono tracking-widest text-zinc-400 uppercase block">Clima en Santa Cruz</span>
+                <h4 class="text-sm font-bold text-zinc-900 dark:text-zinc-100">Santa Cruz, BO</h4>
+                <p id="weather-temp" class="text-xs text-zinc-500 dark:text-zinc-400">Cargando...</p>
+            </div>
+        </div>
+
+        <div id="ytmusic-card" class="hidden flex-col p-4 rounded-2xl border border-black/5 dark:border-white/10 bg-zinc-50/50 dark:bg-zinc-900/30 backdrop-blur-sm justify-between gap-3 transition-colors duration-500">
+            <div class="flex items-center justify-between w-full">
+                <div class="flex items-center gap-3 text-left overflow-hidden w-full">
+                    <div id="eq-container" class="flex items-end gap-0.5 h-6 w-6 shrink-0">
+                        <span id="eq-bar-1" class="w-[3px] h-1 bg-zinc-400 dark:bg-zinc-500 rounded-full transition-all"></span>
+                        <span id="eq-bar-2" class="w-[3px] h-1 bg-zinc-400 dark:bg-zinc-500 rounded-full transition-all"></span>
+                        <span id="eq-bar-3" class="w-[3px] h-1 bg-zinc-400 dark:bg-zinc-500 rounded-full transition-all"></span>
+                        <span id="eq-bar-4" class="w-[3px] h-1 bg-zinc-400 dark:bg-zinc-500 rounded-full transition-all"></span>
+                    </div>
+                    <div class="overflow-hidden w-full">
+                        <span id="player-platform-badge" class="text-[9px] font-mono tracking-widest text-zinc-400 uppercase font-bold block"></span>
+                        <h4 id="song-title" class="text-xs font-bold truncate text-zinc-900 dark:text-zinc-100">Cargando...</h4>
+                        <p id="song-artist" class="text-[10px] text-zinc-500 dark:text-zinc-400 truncate">Cargando...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-6 p-2">
+        <svg class="h-20 w-20 text-black dark:text-white transition-transform duration-700 hover:rotate-180 cursor-pointer" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="8"></circle>
+            <circle cx="50" cy="50" r="19" stroke="currentColor" stroke-width="8"></circle>
+            <line x1="12" y1="72" x2="88" y2="28" stroke="currentColor" stroke-width="8" stroke-linecap="round"></line>
+        </svg>
+    </div>
+
+    <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none mb-6 font-syne uppercase text-center">
+        FRANCO <span class="text-zinc-400 dark:text-zinc-600">SENES</span>
+    </h1>
+
+    <p data-i18n="hero_bio" class="text-zinc-600 dark:text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed text-center">
+        Tengo 13 años y hago paginas web en Santa Cruz, Bolivia. Me gusta usar Node.js, Python, HTML, CSS, JavaScript y Markdown.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+        <a href="https://github.com/Franco-Senes" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm transition-transform active:scale-95 text-center shadow-lg hover:opacity-90 flex items-center justify-center gap-2">
+            <img class="w-5 h-5 dark:hidden" src="https://icons.hackclub.com/api/icons/white/github">
+            <img class="w-5 h-5 hidden dark:block" src="https://icons.hackclub.com/api/icons/black/github">
+            <span data-i18n="hero_github_text">Mi GitHub</span>
+        </a>
+        <a href="#contacto" data-i18n="hero_contact_btn" class="w-full sm:w-auto px-8 py-3.5 rounded-full border border-black/10 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/5 font-semibold text-sm transition-transform active:scale-95 text-center">
+            Escribeme
+        </a>
+    </div>
+</main>
+
+<section id="proyectos" class="relative z-10 py-32 border-t border-black/5 dark:border-white/5 bg-zinc-50/50 dark:bg-zinc-950/20">
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+            <div>
+                <span data-i18n="projects_subtitle" class="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-2">MI TRABAJO</span>
+                <h2 data-i18n="projects_title" class="text-4xl md:text-5xl font-black font-syne uppercase">Mis proyectos</h2>
+            </div>
+            <p data-i18n="projects_desc" class="text-zinc-500 max-w-sm text-sm">
+                Aca estan las cosas que he hecho.
+            </p>
+        </div>
+
+        <div id="projects-grid" class="w-full">
+            <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/40 animate-pulse h-96 w-full">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="hackatons" class="relative z-10 py-32 border-t border-black/5 dark:border-white/5">
+    <div class="max-w-5xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+            <div>
+                <span data-i18n="hackathons_subtitle" class="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-2">MIS COMPETENCIAS</span>
+                <h2 data-i18n="hackathons_title" class="text-4xl md:text-5xl font-black font-syne uppercase">
+                    Hackatons</h2>
+            </div>
+            <p data-i18n="hackathons_desc" class="text-zinc-500 max-w-sm text-sm">
+                Competencias de programacion en las que quiero participar.
+            </p>
+        </div>
+
+        <div class="flex flex-col items-center justify-center p-12 rounded-3xl border border-dashed border-black/10 dark:border-white/10 bg-zinc-50/30 dark:bg-zinc-950/10 text-center animate-fadeIn">
+            <div class="w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center text-zinc-500 dark:text-zinc-400 mb-4">
+                <img class="w-6 h-6 dark:hidden" src="https://icons.hackclub.com/api/icons/slate/history">
+                <img class="w-6 h-6 hidden dark:block" src="https://icons.hackclub.com/api/icons/slate/history">
+            </div>
+            <h3 data-i18n="hackathons_empty_title" class="text-xl font-bold mb-2 font-syne uppercase">Buscando mi primer torneo</h3>
+            <p data-i18n="hackathons_empty_desc" class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed max-w-md">
+                No he participado en hackatons todavia, pero estoy aprendiendo mucho programando y resolviendo problemas. Pronto me unire a una.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="tecnologias" class="relative z-10 py-32 border-t border-black/5 dark:border-white/5 bg-zinc-50/50 dark:bg-zinc-950/20">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+        <span data-i18n="tech_subtitle" class="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-2">LO QUE USO</span>
+        <h2 data-i18n="tech_title" class="text-4xl md:text-5xl font-black font-syne uppercase mb-16">Tecnologias</h2>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">Node.js</h3>
+                <p data-i18n="tech_desc_node" class="text-xs text-zinc-500">Backend y Javascript</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">Python</h3>
+                <p data-i18n="tech_desc_python" class="text-xs text-zinc-500">Programacion y automatizacion</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">HTML5 / CSS3</h3>
+                <p data-i18n="tech_desc_html" class="text-xs text-zinc-500">Hacer paginas</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">JavaScript</h3>
+                <p data-i18n="tech_desc_js" class="text-xs text-zinc-500">Hacer que las cosas se muevan</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">Markdown</h3>
+                <p data-i18n="tech_desc_markdown" class="text-xs text-zinc-500">Para escribir textos</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">Git / GitHub</h3>
+                <p data-i18n="tech_desc_git" class="text-xs text-zinc-500">Para guardar mi codigo</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">SQLite</h3>
+                <p data-i18n="tech_desc_sqlite" class="text-xs text-zinc-500">Bases de datos sencillas</p>
+            </div>
+            <div class="p-6 rounded-2xl border border-black/5 dark:border-white/5 bg-white dark:bg-zinc-950/30 hover:scale-[1.03] transition-transform">
+                <h3 class="font-bold mb-1">Tailwind CSS</h3>
+                <p data-i18n="tech_desc_tailwind" class="text-xs text-zinc-500">Para diseñar rapido</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contacto" class="relative z-10 py-32 border-t border-black/5 dark:border-white/5">
+    <div class="max-w-4xl mx-auto px-6">
+        <div class="text-center mb-16">
+            <span data-i18n="contact_subtitle" class="text-xs font-mono tracking-widest text-zinc-500 uppercase block mb-2">Escribeme</span>
+            <h2 data-i18n="contact_title" class="text-4xl md:text-5xl font-black font-syne uppercase">Contacto</h2>
+        </div>
+
+        <form id="contact-form" class="space-y-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                    <label for="name" data-i18n="contact_name_label" class="text-xs font-mono text-zinc-400 uppercase mb-1">Tu nombre</label>
+                    <input type="text" id="name" name="name" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white" placeholder="Escribe tu nombre aca" data-i18n-placeholder="contact_name_placeholder">
+                </div>
+
+                <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                    <label for="email" data-i18n="contact_email_label" class="text-xs font-mono text-zinc-400 uppercase mb-1">Tu correo</label>
+                    <input type="email" id="email" name="email" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white" placeholder="tu@correo.com" data-i18n-placeholder="contact_email_placeholder">
+                </div>
+            </div>
+
+            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                <label for="message" data-i18n="contact_message_label" class="text-xs font-mono text-zinc-400 uppercase mb-1">Tu mensaje</label>
+                <textarea id="message" name="message" rows="4" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white resize-none" placeholder="Escribe lo que quieras decirme..." data-i18n-placeholder="contact_message_placeholder"></textarea>
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button type="submit" id="contact-submit" data-i18n="contact_submit_btn" class="w-full sm:w-auto px-10 py-4 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm transition-transform active:scale-95">
+                    Enviar
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+    <div class="px-6 py-4 rounded-2xl bg-zinc-950 text-white dark:bg-white dark:text-black shadow-2xl flex items-center gap-3 border border-white/10 dark:border-black/10">
+        <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span id="toast-message" data-i18n="toast_success" class="text-sm font-medium">Mensaje enviado, te respondere pronto</span>
+    </div>
+</div>
+
+<footer class="relative z-10 bg-zinc-50 dark:bg-zinc-950 py-16 border-t border-black/5 dark:border-white/5 text-center text-zinc-500 text-xs font-mono tracking-widest">
+    <div class="max-w-5xl mx-auto px-4">
+        <p data-i18n="footer_credits" class="mb-4">Zero Portafolio - Hecho por Franco</p>
+        <div class="flex justify-center gap-6 mt-4">
+            <a href="#inicio" data-i18n="footer_back_to_top" class="hover:text-black dark:hover:text-white transition-colors">Volver arriba</a>
+            <span class="text-zinc-300 dark:text-zinc-800">/</span>
+            <a href="https://github.com/Franco-Senes" target="_blank" rel="noopener noreferrer" class="hover:text-black dark:hover:text-white transition-colors">GITHUB</a>
+        </div>
+    </div>
+</footer>
+
+<div id="auth-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4 animate-fadeIn">
+    <div class="bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-white w-full max-w-[420px] rounded-[32px] border border-black/5 dark:border-zinc-800/80 p-8 sm:p-10 shadow-2xl relative overflow-hidden bg-radial-glow backdrop-blur-md animate-scaleUp">
+
+        <div class="flex flex-col items-center mb-8">
+            <svg class="h-12 w-12 text-zinc-900 dark:text-white mb-2 transition-transform duration-500 hover:rotate-12 cursor-pointer" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="10"></circle>
+                <circle cx="50" cy="50" r="19" stroke="currentColor" stroke-width="10"></circle>
+                <line x1="12" y1="72" x2="88" y2="28" stroke="currentColor" stroke-width="10" stroke-linecap="round"></line>
+            </svg>
+            <span class="text-2xl font-black font-syne lowercase tracking-wider text-zinc-950 dark:text-white">zero</span>
+        </div>
+
+        <form id="auth-form" class="space-y-4">
+            <div class="flex items-center border border-black/10 dark:border-zinc-800/80 rounded-2xl bg-black/5 dark:bg-zinc-900/40 px-4 py-3.5 gap-3 auth-input transition-all duration-300">
+                <img class="w-5 h-5 text-zinc-500 shrink-0" src="https://icons.hackclub.com/api/icons/slate/email">
+                <input type="email" id="auth-email" required class="bg-transparent border-0 outline-none w-full text-sm text-zinc-950 dark:text-white placeholder-zinc-500 placeholder:font-sans font-sans" placeholder="Correo electronico" data-i18n-placeholder="email_label">
+            </div>
+
+            <div id="auth-password-container" class="flex items-center border border-black/10 dark:border-zinc-800/80 rounded-2xl bg-black/5 dark:bg-zinc-900/40 px-4 py-3.5 gap-3 auth-input transition-all duration-300 relative">
+                <img class="w-5 h-5 text-zinc-500 shrink-0" src="https://icons.hackclub.com/api/icons/slate/private">
+                <input type="password" id="auth-password" required class="bg-transparent border-0 outline-none w-full text-sm text-zinc-950 dark:text-white placeholder-zinc-500 placeholder:font-sans font-sans" placeholder="Contrasena" data-i18n-placeholder="pass_label">
+
+                <button type="button" id="toggle-password-btn" class="p-1 text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors focus:outline-none shrink-0" aria-label="Mostrar/Ocultar contraseña">
+                    <img id="eye-open-path" class="w-4 h-4 text-zinc-500 hover:text-zinc-950 dark:hover:text-white" src="https://icons.hackclub.com/api/icons/slate/view">
+                    <img id="eye-closed-path" class="w-4 h-4 hidden text-zinc-500 hover:text-zinc-950 dark:hover:text-white" src="https://icons.hackclub.com/api/icons/slate/view-hide">
+                </button>
+            </div>
+
+            <div id="auth-2fa-container" class="hidden flex items-center border border-black/10 dark:border-zinc-800/80 rounded-2xl bg-black/5 dark:bg-zinc-900/40 px-4 py-3.5 gap-3 auth-input transition-all duration-300">
+                <img class="w-5 h-5 text-zinc-500 shrink-0" src="https://icons.hackclub.com/api/icons/slate/private">
+                <input type="text" id="auth-2fa-code" maxlength="6" class="bg-transparent border-0 outline-none w-full text-sm text-zinc-950 dark:text-white placeholder-zinc-500 placeholder:font-sans font-sans font-mono tracking-wider" placeholder="Codigo de 2FA" data-i18n-placeholder="placeholder_2fa_code">
+            </div>
+
+            <div class="text-right flex items-center justify-between">
+                <button type="button" id="back-to-classic-btn" class="hidden text-[11px] text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors font-mono underline" data-i18n="back_to_classic">Volver al login clasico</button>
+                <a href="#" id="forgot-password-link" class="text-[11px] text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors font-mono" data-i18n="forgot_password">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <button type="submit" id="auth-submit-btn" class="w-full py-4.5 rounded-2xl bg-black text-white dark:bg-white dark:text-black font-semibold text-sm hover:opacity-90 active:scale-95 transition-all duration-300 flex items-center justify-center gap-2 mt-4" data-i18n="login_submit_btn">
+                <img class="w-4 h-4 shrink-0" src="https://icons.hackclub.com/api/icons/white/private">
+                Iniciar sesion
+            </button>
+
+            <div id="auth-feedback" class="hidden"></div>
+        </form>
+
+        <div id="oauth-social-container" class="space-y-5">
+            <div class="relative flex py-5 items-center">
+                <div class="flex-grow border-t border-black/10 dark:border-zinc-800/60"></div>
+                <span class="flex-shrink mx-4 text-xs font-mono text-zinc-500 uppercase" data-i18n="or_divider">o</span>
+                <div class="flex-grow border-t border-black/10 dark:border-zinc-800/60"></div>
+            </div>
+
+            <div class="space-y-3">
+                <button type="button" data-platform="Hackclub" class="social-oauth-btn w-full py-3.5 border border-black/10 dark:border-zinc-800/80 rounded-2xl bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 active:scale-98 transition-all flex items-center justify-center gap-3 text-xs font-semibold text-zinc-800 dark:text-zinc-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor" aria-label="Hack Club" class="h-5 w-5"><path fill-rule="evenodd" clip-rule="evenodd" d="M128 256C230.4 256 256 230.4 256 128C256 25.6 230.4 0 128 0C25.6 0 0 25.6 0 128C0 230.4 25.6 256 128 256ZM115.103 48.3682C115.103 47.1299 113.989 46.1892 112.769 46.3965L81.6652 51.6777C80.7036 51.8409 80 52.6741 80 53.6494V205.085C80 206.189 80.8954 207.085 82 207.085H113.103C114.208 207.085 115.103 206.189 115.103 205.085V148.397C115.103 131.127 124.261 120.429 131.892 120.429C138.76 120.429 140.744 127.307 140.744 137.699V205.085C140.744 206.189 141.639 207.085 142.744 207.085H174C175.105 207.085 176 206.189 176 205.085V132.656C176 109.12 167.148 93.9892 144.102 93.9892C134.852 93.9892 125.825 96.2163 118.633 101.146C117.205 102.125 115.103 101.161 115.103 99.4284V48.3682Z"></path></svg>
+                    Hackclub
+                </button>
+                <button type="button" id="2fa-login-toggle-btn" class="w-full py-3.5 border border-black/10 dark:border-zinc-800/80 rounded-2xl bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-900/60 active:scale-98 transition-all flex items-center justify-center gap-3 text-xs font-semibold text-zinc-800 dark:text-zinc-200">
+                    <img class="w-4 h-4 shrink-0 text-zinc-500" src="https://icons.hackclub.com/api/icons/slate/private">
+                    <span data-i18n="btn_login_2fa">Iniciar sesion con 2FA</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="mt-8 pt-4 border-t border-black/10 dark:border-zinc-900/80 flex items-center justify-center gap-2 text-[10px] font-mono text-zinc-500 uppercase">
+            <img class="w-3.5 h-3.5" src="https://icons.hackclub.com/api/icons/slate/private">
+            <span data-i18n="secure_connection">Conexion segura SSL.</span>
+        </div>
+
+    </div>
+</div>
+
+<div id="oauth-loading-modal" class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4 animate-fadeIn">
+    <div class="bg-zinc-50 dark:bg-zinc-950 text-zinc-950 dark:text-white w-full max-w-[340px] rounded-3xl border border-black/5 dark:border-zinc-800/80 p-8 shadow-2xl flex flex-col items-center justify-center gap-4 text-center backdrop-blur-md">
+        <div class="w-8 h-8 rounded-full border-2 border-zinc-300 dark:border-zinc-700 border-t-black dark:border-t-white animate-spin">
+        </div>
+        <p id="oauth-loading-text" class="text-sm font-mono font-bold text-zinc-800 dark:text-zinc-300">
+            Conectando...</p>
+    </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+
+</html>

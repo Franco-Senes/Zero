@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero - Autorizacion de aplicacion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/oauth.css">
+</head>
+<body class="bg-zinc-50 text-zinc-950 dark:bg-black dark:text-zinc-100 min-h-screen font-sans flex items-center justify-center p-4 selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(0,0,0,0.02),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_40%,rgba(255,255,255,0.015),transparent_50%)] pointer-events-none z-0"></div>
+
+    <div class="relative z-10 w-full max-w-[440px] p-8 sm:p-10 rounded-[32px] border border-black/5 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-950/40 backdrop-blur-md shadow-2xl space-y-8 animate-scaleUp">
+        
+        <div class="flex flex-col items-center text-center">
+            <div class="flex items-center gap-4 mb-4">
+                <svg class="h-10 w-10 text-black dark:text-white" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="10"></circle>
+                    <circle cx="50" cy="50" r="19" stroke="currentColor" stroke-width="10"></circle>
+                    <line x1="12" y1="72" x2="88" y2="28" stroke="currentColor" stroke-width="10" stroke-linecap="round"></line>
+                </svg>
+                <div class="h-2 w-2 rounded-full bg-zinc-300 dark:bg-zinc-700 animate-pulse"></div>
+                <img id="app-icon" class="w-10 h-10 rounded-2xl border border-black/5 dark:border-white/5 object-cover" src="" alt="App Icon">
+            </div>
+            <h1 class="text-xl font-bold font-syne uppercase tracking-wider mb-2">Autorizar aplicacion</h1>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400">La aplicacion <span id="app-name-display" class="font-semibold text-black dark:text-white">Cargando...</span> quiere acceder a tu cuenta de Zero.</p>
+        </div>
+
+        <div class="space-y-4">
+            <span class="text-xs font-mono text-zinc-400 uppercase tracking-widest block">Permisos solicitados:</span>
+            <div class="space-y-3">
+                <div class="flex gap-3 items-start p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                    <img class="w-5 h-5 opacity-70 shrink-0 mt-0.5 dark:invert" src="https://icons.hackclub.com/api/icons/slate/profile">
+                    <div>
+                        <h4 class="text-xs font-bold">Perfil basico</h4>
+                        <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Tu nombre de usuario y tu foto de perfil.</p>
+                    </div>
+                </div>
+                <div class="flex gap-3 items-start p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5">
+                    <img class="w-5 h-5 opacity-70 shrink-0 mt-0.5 dark:invert" src="https://icons.hackclub.com/api/icons/slate/email">
+                    <div>
+                        <h4 class="text-xs font-bold">Correo electronico</h4>
+                        <p class="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">Tu direccion de correo electronico principal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+            <button id="cancel-btn" class="w-full sm:w-1/2 py-3.5 rounded-2xl border border-black/10 dark:border-zinc-800/80 hover:bg-black/5 dark:hover:bg-white/5 font-semibold text-sm active:scale-98 transition-all">
+                Cancelar
+            </button>
+            <button id="authorize-btn" class="w-full sm:w-1/2 py-3.5 rounded-2xl bg-black text-white dark:bg-white dark:text-black font-semibold text-sm hover:opacity-90 active:scale-98 transition-all">
+                Autorizar
+            </button>
+        </div>
+
+        <div class="text-center pt-2 text-[10px] font-mono text-zinc-500 uppercase tracking-widest">
+            Conexion segura SSL.
+        </div>
+
+    </div>
+
+    <script src="js/oauth.js"></script>
+</body>
+</html>

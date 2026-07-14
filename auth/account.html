@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero - Ajustes</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        syne: ['Syne', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/account.css">
+</head>
+<body class="bg-zinc-50 text-zinc-950 dark:bg-black dark:text-zinc-100 min-h-screen font-sans antialiased overflow-x-hidden selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+
+    <div class="fixed inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(0,0,0,0.03),transparent_40%)] dark:bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.02),transparent_40%)] pointer-events-none z-0"></div>
+
+    <header class="relative z-10 border-b border-black/5 dark:border-white/5 bg-white/40 dark:bg-black/40 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="/index.html" class="flex items-center gap-3 group focus:outline-none">
+                <svg class="h-6 w-6 text-black dark:text-white transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="10"></circle>
+                    <circle cx="50" cy="50" r="19" stroke="currentColor" stroke-width="10"></circle>
+                    <line x1="12" y1="72" x2="88" y2="28" stroke="currentColor" stroke-width="10" stroke-linecap="round"></line>
+                </svg>
+                <span class="text-lg font-black tracking-wide lowercase text-black dark:text-white font-syne">zero</span>
+            </a>
+
+            <div class="flex items-center gap-4">
+                <button id="theme-toggle" class="p-2.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors focus:outline-none" aria-label="Cambiar tema">
+                    <img id="moon-icon" class="w-4 h-4 text-black block dark:hidden" src="https://icons.hackclub.com/api/icons/black/moon">
+                    <img id="sun-icon" class="w-4 h-4 text-white hidden dark:block" src="https://icons.hackclub.com/api/icons/white/sun">
+                </button>
+                <button id="logout-btn" class="px-5 py-2 rounded-full border border-black/10 dark:border-white/10 text-xs font-semibold hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                    Cerrar sesion
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 max-w-6xl mx-auto px-6 py-12">
+        <div class="flex flex-col lg:flex-row gap-12">
+            
+            <aside class="w-full lg:w-64 shrink-0">
+                <nav class="flex lg:flex-col gap-2 overflow-x-auto pb-4 lg:pb-0 border-b border-black/5 lg:border-b-0 dark:border-white/5">
+                    <button data-tab="profile" class="tab-btn active flex items-center gap-3 px-5 py-3.5 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap">
+                        <img class="w-4 h-4 opacity-70 dark:invert" src="https://icons.hackclub.com/api/icons/slate/profile">
+                        Mi cuenta
+                    </button>
+                    <button data-tab="security" class="tab-btn flex items-center gap-3 px-5 py-3.5 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap">
+                        <img class="w-4 h-4 opacity-70 dark:invert" src="https://icons.hackclub.com/api/icons/slate/private">
+                        Seguridad
+                    </button>
+                    <button data-tab="developer" class="tab-btn flex items-center gap-3 px-5 py-3.5 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap">
+                        <img class="w-4 h-4 opacity-70 dark:invert" src="https://icons.hackclub.com/api/icons/slate/code">
+                        Desarrolladores
+                    </button>
+                    <button data-tab="docs" class="tab-btn flex items-center gap-3 px-5 py-3.5 rounded-2xl text-sm font-semibold transition-all whitespace-nowrap">
+                        <img class="w-4 h-4 opacity-70 dark:invert" src="https://icons.hackclub.com/api/icons/slate/docs">
+                        Documentacion
+                    </button>
+                </nav>
+            </aside>
+
+            <div class="flex-grow">
+                
+                <section id="tab-profile" class="tab-content space-y-8">
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Detalles del perfil</h2>
+                        
+                        <div class="flex flex-col sm:flex-row items-center gap-8 mb-8 pb-8 border-b border-black/5 dark:border-white/5">
+                            <div class="relative group">
+                                <img id="user-avatar" class="w-24 h-24 rounded-full border border-black/10 dark:border-white/10 object-cover bg-zinc-200 dark:bg-zinc-800" src="https://icons.hackclub.com/api/icons/slate/profile" alt="Avatar">
+                                <label for="avatar-input" class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                    <img class="w-6 h-6 text-white" src="https://icons.hackclub.com/api/icons/white/camera">
+                                </label>
+                                <input type="file" id="avatar-input" accept="image/*" class="hidden">
+                            </div>
+                            <div class="text-center sm:text-left">
+                                <h3 id="profile-username" class="text-lg font-bold">Cargando...</h3>
+                                <p id="profile-email" class="text-sm text-zinc-500 dark:text-zinc-400">Cargando...</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2">
+                                <span class="text-xs font-mono text-zinc-400 uppercase mb-1">Nombre de usuario</span>
+                                <input type="text" id="edit-username" disabled class="bg-transparent outline-none py-1 text-sm text-zinc-400 cursor-not-allowed" value="Cargando...">
+                            </div>
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2">
+                                <span class="text-xs font-mono text-zinc-400 uppercase mb-1">Correo electronico</span>
+                                <input type="email" id="edit-email" disabled class="bg-transparent outline-none py-1 text-sm text-zinc-400 cursor-not-allowed" value="Cargando...">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab-security" class="tab-content hidden space-y-8">
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Cambiar contraseña</h2>
+                        <form id="password-form" class="space-y-6">
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors relative">
+                                <label for="current-password" class="text-xs font-mono text-zinc-400 uppercase mb-1">Contraseña actual</label>
+                                <input type="password" id="current-password" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white">
+                            </div>
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors relative">
+                                <label for="new-password" class="text-xs font-mono text-zinc-400 uppercase mb-1">Nueva contraseña</label>
+                                <input type="password" id="new-password" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-8 py-3.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm active:scale-95 transition-transform">
+                                    Actualizar contraseña
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-xl font-bold font-syne uppercase tracking-wider">Autenticacion de dos factores (2FA)</h2>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Añade una capa extra de seguridad a tu cuenta</p>
+                            </div>
+                            <label class="switch relative inline-block w-11 h-6 cursor-pointer">
+                                <input type="checkbox" id="2fa-toggle" class="sr-only peer">
+                                <div class="w-11 h-6 bg-zinc-200 dark:bg-zinc-800 rounded-full peer-checked:bg-emerald-500 after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-full"></div>
+                            </label>
+                        </div>
+
+                        <div id="2fa-setup-section" class="hidden border-t border-black/5 dark:border-white/5 pt-6 space-y-6">
+                            <p class="text-sm text-zinc-600 dark:text-zinc-300">Escanea el codigo qr con una app de authenticacion.</p>
+                            <div class="flex flex-col sm:flex-row items-center gap-8 bg-black/5 dark:bg-white/5 p-6 rounded-2xl border border-black/5 dark:border-white/5">
+                                <div id="2fa-qr-container" class="bg-white p-3 rounded-xl"></div>
+                                <div class="flex-grow space-y-4 w-full">
+                                    <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                                        <label for="2fa-verification-code" class="text-xs font-mono text-zinc-400 uppercase mb-1">Codigo de verificacion</label>
+                                        <input type="text" id="2fa-verification-code" maxlength="6" class="bg-transparent outline-none py-1 text-sm tracking-widest font-mono text-black dark:text-white" placeholder="000000">
+                                    </div>
+                                    <button id="2fa-activate-btn" class="w-full py-3.5 rounded-xl bg-black text-white dark:bg-white dark:text-black font-semibold text-xs active:scale-98 transition-transform">
+                                        Activar 2FA
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="2fa-status-active" class="hidden flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-2xl text-emerald-600 dark:text-emerald-400 text-sm">
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>Tu cuenta esta protegida con 2FA.</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab-developer" class="tab-content hidden space-y-8">
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Crear nueva aplicacion</h2>
+                        <form id="create-app-form" class="space-y-6">
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                                <label for="app-name" class="text-xs font-mono text-zinc-400 uppercase mb-1">Nombre de la aplicacion</label>
+                                <input type="text" id="app-name" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white" placeholder="Mi aplicacion de pruebas">
+                            </div>
+                            <div class="flex flex-col border-b border-black/10 dark:border-white/10 py-2 focus-within:border-black dark:focus-within:border-white transition-colors">
+                                <label for="app-redirect-uri" class="text-xs font-mono text-zinc-400 uppercase mb-1">Redirect URI</label>
+                                <input type="url" id="app-redirect-uri" required class="bg-transparent outline-none py-1 text-sm text-black dark:text-white" placeholder="http://localhost:3000/callback">
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="px-8 py-3.5 rounded-full bg-black text-white dark:bg-white dark:text-black font-semibold text-sm active:scale-95 transition-transform">
+                                    Registrar aplicacion
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Tus aplicaciones developer</h2>
+                        <div id="developer-apps-list" class="space-y-6">
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 text-center py-6">No tienes ninguna aplicacion registrada todavia</p>
+                        </div>
+                    </div>
+
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Aplicaciones autorizadas</h2>
+                        <div id="authorized-apps-list" class="space-y-6">
+                            <p class="text-sm text-zinc-500 dark:text-zinc-400 text-center py-6">No has autorizado ninguna aplicacion de terceros todavia</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="tab-docs" class="tab-content hidden space-y-8">
+                    <div class="p-8 rounded-3xl border border-black/5 dark:border-white/5 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-sm shadow-xl">
+                        <h2 class="text-xl font-bold font-syne uppercase tracking-wider mb-6">Guia para desarrolladores</h2>
+                        <div class="prose prose-zinc dark:prose-invert max-w-none space-y-6 text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                            <p>Puedes usar Zero como un proveedor de autenticacion OAuth 2.0. A continuacion te indicamos como integrarlo en tus proyectos.</p>
+                            
+                            <div>
+                                <h3 class="font-bold text-black dark:text-white mb-2">1. Autorizacion</h3>
+                                <p class="mb-2">Redirecciona a tus usuarios a la siguiente URL para comenzar el flujo de OAuth:</p>
+                                <pre class="bg-black/5 dark:bg-white/5 p-4 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs overflow-x-auto text-black dark:text-zinc-100">GET http://localhost:3000/oauth/authorize?client_id=TU_CLIENT_ID&redirect_uri=TU_REDIRECT_URI&state=OPCIONAL</pre>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-black dark:text-white mb-2">2. Intercambio de Token</h3>
+                                <p class="mb-2">Una vez que el usuario consienta, sera redirigido a tu callback con un parametro <code>code</code>. Intercambialo enviando una peticion POST:</p>
+                                <pre class="bg-black/5 dark:bg-white/5 p-4 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs overflow-x-auto text-black dark:text-zinc-100">POST http://localhost:3000/oauth/token
+Content-Type: application/json
+
+{
+  "client_id": "TU_CLIENT_ID",
+  "client_secret": "TU_CLIENT_SECRET",
+  "code": "CODIGO_RECIBIDO",
+  "redirect_uri": "TU_REDIRECT_URI"
+}</pre>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-black dark:text-white mb-2">3. Obtener informacion del usuario</h3>
+                                <p class="mb-2">Utiliza el access token obtenido para hacer consultas a la API de Zero:</p>
+                                <pre class="bg-black/5 dark:bg-white/5 p-4 rounded-xl border border-black/10 dark:border-white/10 font-mono text-xs overflow-x-auto text-black dark:text-zinc-100">GET http://localhost:3000/api/userinfo
+Authorization: Bearer EL_ACCESS_TOKEN_RECIBIDO</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="toast" class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-500 pointer-events-none">
+        <div class="px-6 py-4 rounded-2xl bg-zinc-950 text-white dark:bg-white dark:text-black shadow-2xl flex items-center gap-3 border border-white/10 dark:border-black/10">
+            <span id="toast-message" class="text-sm font-medium">Ajustes actualizados correctamente</span>
+        </div>
+    </div>
+
+    <script src="js/account.js"></script>
+</body>
+</html>
