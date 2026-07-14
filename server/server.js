@@ -104,6 +104,8 @@ const authenticateToken = async (req, res, next) => {
             return res.status(401).json({ error: 'User not found' });
         }
         req.user = user;
+        req.user.is_oauth = decoded.is_oauth || false;
+        req.is_oauth = decoded.is_oauth || false;
         next();
     } catch (err) {
         res.status(403).json({ error: 'Invalid token bruv' });
@@ -121,6 +123,10 @@ const optionalAuthenticateToken = async (req, res, next) => {
         const decoded = jwt.verify(token, JWT_SECRET);
         const user = await db.get('SELECT id, email, username, avatar_url, two_factor_enabled, two_factor_login_required, created_at FROM users WHERE id = ?', [decoded.id]);
         req.user = user || null;
+        if (req.user) {
+            req.user.is_oauth = decoded.is_oauth || false;
+        }
+        req.is_oauth = decoded.is_oauth || false;
         next();
     } catch (err) {
         req.user = null;
@@ -244,8 +250,8 @@ app.get('/api/auth/me', authenticateToken, (req, res) => {
 
 app.post('/api/user/change-password', authenticateToken, authLimiter, async (req, res) => {
     const { currentPassword, newPassword, code } = req.body;
-    if (!currentPassword || !newPassword) {
-        return res.status(400).json({ error: 'Both password are required' });
+    if ((!currentPassword && !req.is_oauth) || !newPassword) {
+        return res.status(400).json({ error: 'Both passwords are required' });
     }
 
     try {
@@ -262,9 +268,12 @@ app.post('/api/user/change-password', authenticateToken, authLimiter, async (req
             }
         }
 
-        const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
-        if (!isMatch) {
-            return res.status(400).json({ error: 'Actual password incorrect' });
+        // Only compare current password if they didn't log in via OAuth
+        if (!req.is_oauth) {
+            const isMatch = await bcrypt.compare(currentPassword, user.password_hash);
+            if (!isMatch) {
+                return res.status(400).json({ error: 'Actual password incorrect' });
+            }
         }
 
         const newHash = await bcrypt.hash(newPassword, 12);
@@ -759,7 +768,7 @@ app.get('/api/auth/hackclub/callback', async (req, res) => {
         }
 
         const sessionToken = jwt.sign(
-            { id: user.id, email: user.email },
+            { id: user.id, email: user.email, is_oauth: true },
             JWT_SECRET,
             { expiresIn: '24h' }
         );

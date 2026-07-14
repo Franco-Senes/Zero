@@ -139,6 +139,17 @@ async function loadProfile() {
         } else {
             document.getElementById('user-avatar').src = generateZeroAvatar(currentUser.username);
         }
+
+        if (currentUser.is_oauth) {
+            const currentPassInput = document.getElementById('current-password');
+            if (currentPassInput) {
+                currentPassInput.removeAttribute('required');
+                const label = currentPassInput.previousElementSibling;
+                if (label) {
+                    label.textContent = "Contraseña actual (opcional si entraste con Hack Club)";
+                }
+            }
+        }
         
         init2faState();
     } catch (err) {
